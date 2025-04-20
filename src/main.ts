@@ -460,3 +460,24 @@
 // const basicPorts2: readonly [number, ...string[]] = [3000, "3001", "5555"];
 
 // const basicPorts: ReadonlyArray<number> = [3000, 3001, 5555];
+
+// enum Directions {
+//   TOP,
+//   RIGHT,
+//   LEFT,
+//   BOTTOM,
+// }
+
+// enum TimingFunc {
+//   EASE = "ease",
+//   EASE_IN = "ease-in",
+//   LINEAR = "linear",
+// }
+
+// const frame = (elem: string, dir: Directions, tFunc: TimingFunc): void => {
+//   if (dir === Directions.RIGHT) {
+//     console.log(tFunc, elem);
+//   }
+// };
+
+// frame("id", Directions.RIGHT, TimingFunc.EASE);
