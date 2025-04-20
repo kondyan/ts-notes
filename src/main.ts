@@ -316,79 +316,147 @@
 // console.log(startService(serverConfig));
 // console.log(startService(backupConfig));
 
-//! структура данных склада с одеждой
+// type ValidAmount = "empty" | number;
 
-interface IClothesWarehouse {
-  jackets: "empty" | number;
-  hats: "empty" | number;
-  socks: "empty" | number;
-  pants: "empty" | number;
-}
+// //! структура данных склада с одеждой
 
-//! структура данных склада с канцтоварами
+// interface IClothesWarehouse {
+//   jackets: ValidAmount
+//   hats: ValidAmount
+//   socks: ValidAmount
+//   pants: ValidAmount
+// }
 
-interface IStationeryWarehouse {
-  scissors: "empty" | number;
-  paper: "empty" | boolean;
-}
+// //! структура данных склада с канцтоварами
 
-//! структура данных склада с бытовой техникой
+// interface IStationeryWarehouse {
+//   scissors: ValidAmount
+//   paper: "ValidAmount
+// }
 
-interface IAppliancesWarehouse {
-  dishwashers: "empty" | number;
-  cookers: "empty" | number;
-  mixers: "empty" | number;
-}
+// //! структура данных склада с бытовой техникой
 
-//! общая структура данных, наследует все данные из трех выше
-//! + добавляет свои
+// interface IAppliancesWarehouse {
+//   dishwashers: ValidAmount
+//   cookers: ValidAmount
+//   mixers: ValidAmount
+// }
 
-interface iTotalWarehouse
-  extends IClothesWarehouse,
-    IStationeryWarehouse,
-    IAppliancesWarehouse {
-  deficit?: boolean;
-  date?: Date;
-  // ? how to get rid of the bug without making properties optional and changing totalData
-}
+// //! общая структура данных, наследует все данные из трех выше
+// //! + добавляет свои
 
-//! главный объект со всеми данными, должен подходить под формат TotalWarehouse
+// interface iTotalWarehouse
+//   extends IClothesWarehouse,
+//     IStationeryWarehouse,
+//     IAppliancesWarehouse {
+//   deficit: boolean;
+//   date: Date;
+// }
 
-const totalData: iTotalWarehouse = {
-  jackets: 5,
-  hats: "empty",
-  socks: "empty",
-  pants: 15,
-  scissors: 15,
-  paper: true,
-  dishwashers: 3,
-  cookers: "empty",
-  mixers: 14,
-};
+// //! главный объект со всеми данными, должен подходить под формат TotalWarehouse
 
-//TODO Реализуйте функцию, которая принимает в себя главный объект totalData нужного формата
-//TODO и возвращает всегда строку
-//TODO Функция должна отфильтровать данные из объекта и оставить только те названия товаров, у которых значение "empty"
-//TODO и поместить их в эту строку. Если таких товаров нет - возвращается другая строка (см ниже)
+// const totalData: iTotalWarehouse = {
+//   jackets: 5,
+//   hats: "empty",
+//   socks: "empty",
+//   pants: 15,
+//   scissors: 15,
+//   paper: true,
+//   dishwashers: 3,
+//   cookers: "empty",
+//   mixers: 14,
+//   deficit: true,
+//   date: new Date(),
+// };
 
-//TODO С данным объектом totalData строка будет выглядеть:
-//TODO "We need this items: hats, socks, cookers"
-//TODO Товары через запятую, в конце её не должно быть. Пробел после двоеточия, в конце строки его нет.
+// //TODO Реализуйте функцию, которая принимает в себя главный объект totalData нужного формата
+// //TODO и возвращает всегда строку
+// //TODO Функция должна отфильтровать данные из объекта и оставить только те названия товаров, у которых значение "empty"
+// //TODO и поместить их в эту строку. Если таких товаров нет - возвращается другая строка (см ниже)
 
-function printReport(data: iTotalWarehouse): string {
-  let items: string[] = [];
+// //TODO С данным объектом totalData строка будет выглядеть:
+// //TODO "We need this items: hats, socks, cookers"
+// //TODO Товары через запятую, в конце её не должно быть. Пробел после двоеточия, в конце строки его нет.
 
-  const newData = Object.entries(data);
-  newData.filter((item) => {
-    if (item[1] === "empty") {
-      items.push(item[0]);
-    }
-  });
-  if (items) {
-    return `We need these items: ${items.join(", ")}`;
-  } else {
-    return "Everything's fine";
-  }
-}
+// function printReport(data: iTotalWarehouse): string {
+//   let items: string[] = [];
 
-console.log(printReport(totalData));
+//   const newData = Object.entries(data);
+//   newData.filter((item) => {
+//     if (item[1] === "empty") {
+//       items.push(item[0]);
+//     }
+//   });
+//   if (items) {
+//     return `We need these items: ${items.join(", ")}`;
+//   } else {
+//     return "Everything's fine";
+//   }
+// }
+
+// console.log(printReport(totalData));
+
+// let salary: number;
+// salary = 500;
+
+// interface UserData {
+//   isBirthdayData: boolean;
+//   ageData: number;
+//   userNameData: string;
+// }
+
+// const userData = "{}";
+
+// const userObj: UserData = JSON.parse(userData);
+// console.log(userObj.smt);
+
+// let isOk = true;
+// let movement: boolean | string = false;
+
+//  if (isOk) {
+//   movement = "moving";
+// }
+
+// interface User {
+//   readonly login: string;
+//   password: string;
+//   age: number;
+//   // addressee?: string
+//   addressee: string | undefined;
+//   parents?: {
+//     mother?: string;
+//     father?: string;
+//   };
+// }
+
+// const user: User = {
+//   login: "first",
+//   password: "qwerty",
+//   age: 15,
+//   addressee: undefined,
+// };
+
+// console.log(user);
+
+// let dbName: string | undefined;
+
+// console.log(dbName!);
+
+// const userFreeze: Readonly<User> = {
+//   login: "first",
+//   password: "qwerty",
+//   age: 15,
+//   addressee: undefined,
+// };
+
+// const sendUserData = (obj: User, db?: string): void => {
+//   dbName = db;
+//   console.log(obj.parents?.father?.toLowerCase(), db?.toLowerCase());
+// };
+
+// console.log(sendUserData(user, "asdfasdf"));
+
+// const basicPorts: readonly number[] = [3000, 3001, 5555];
+// const basicPorts2: readonly [number, ...string[]] = [3000, "3001", "5555"];
+
+// const basicPorts: ReadonlyArray<number> = [3000, 3001, 5555];
