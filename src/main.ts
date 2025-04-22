@@ -481,3 +481,408 @@
 // };
 
 // frame("id", Directions.RIGHT, TimingFunc.EASE);
+
+// let something: unknown;
+// something = "str";
+
+// let data: string[] = something;
+// data.find((e) => e);
+
+// const fetchData = (data: unknown): void => {
+//   if (typeof data === "string") {
+//     console.log(data.toLowerCase());
+//   }
+// };
+
+// const userData = '{"isBirthdayData": true}';
+
+// const safeParse = (s: string): unknown => {
+//   return JSON.parse(s);
+// };
+
+// const data = safeParse(userData);
+
+// const transferData = (d: unknown): void => {
+//   if (typeof d === "string") {
+//   } else if (typeof d === "object" && d) {
+//     console.log(data);
+//   } else {
+//     console.error("Some error");
+//   }
+// };
+
+// transferData(data);
+
+// try {
+//   if (1) {
+//     throw new Error("error");
+//   }
+// } catch (error) {
+//   if (error instanceof Error) {
+//     console.log(error);
+//   } else if (typeof error === "string") {
+//     console.log(error.toUpperCase());
+//   }
+// }
+
+// type T0 = any | unknown;
+// type T1 = number | unknown;
+
+// const dataFromControl = {
+//   water: 200,
+//   el: 350,
+// };
+
+// const checkReadings = (data: typeof dataFromControl): boolean => {
+//   const dataFormUser = {
+//     water: 200,
+//     el: 350,
+//   };
+
+//   if (data.el === dataFormUser.el && data.water === dataFormUser.water) {
+//     return true;
+//   }
+//   return false;
+// };
+
+// console.log(checkReadings(dataFromControl));
+
+// const PI = 3.14;
+// let PIClone: typeof PI;
+
+// enum TypesOfMedia {
+//   VIDEO = "video",
+//   AUDIO = "audio",
+// }
+
+// enum FormatsOfMedia {
+//   MP4 = ".mp4",
+//   MOV = ".mov",
+//   MKV = ".mkv",
+//   FLV = ".flv",
+//   WEBM = ".webM",
+// }
+
+// interface IMedia {
+//   name: string;
+//   type: TypesOfMedia;
+//   format: FormatsOfMedia;
+//   subtitles?: string;
+//   marks?: unknown;
+// }
+
+// function playMedia(
+//   { name, type, format, subtitles, marks }: IMedia = {
+//     name: "example",
+//     type: TypesOfMedia.VIDEO,
+//     format: FormatsOfMedia.MOV,
+//   }
+// ): string {
+//   let marksLog: unknown;
+
+//   // * possible solution: Array.isArray(marks)
+//   if (marks instanceof Array) {
+//     marksLog = marks.join(" ");
+//   } else if (typeof marks === "string") {
+//     marksLog = marks;
+//   } else {
+//     marksLog = "Unsupported type of marks";
+//   }
+
+//   console.log(`Media ${name}${format} is ${type}
+//     Marks: ${marksLog}
+//     Subtitles: ${subtitles ?? "none"}`);
+
+//   return "Media started";
+// }
+
+// playMedia({
+//   name: "WoW",
+//   format: FormatsOfMedia.FLV,
+//   type: TypesOfMedia.VIDEO,
+//   subtitles: "something",
+//   marks: ["4:30", "5:40"],
+// });
+
+// const fetchData = (url: string, method: "GET" | "POST"): void => {
+//   console.log(method);
+// };
+
+// const reqOptions = {
+//   url: "https://someurl.com",
+//   method: "GET",
+// } as const;
+
+// fetchData("qqq", "GET");
+// fetchData(reqOptions.url, reqOptions.method);
+
+// const box = document.querySelector(".box") as HTMLElement;
+
+// let a = "value" as const;
+
+// let b = { f: 100 } as const;
+// let c = [] as const;
+
+// let value = "value";
+// let obj = { f: 100 };
+
+// let T0 = obj as const
+
+// let a = (Math.round(Math.random() * 1) ? "yes" : "no") as const;
+
+// const num = 5;
+// const strNum: string = num.toString();
+// console.log(strNum);
+
+// const str = "5";
+// const numStr: number = +str;
+
+// interface Department {
+//   name: string;
+//   budget: number;
+// }
+
+// interface Project {
+//   name: string;
+//   projectBudget: number;
+// }
+//   const department: Department = {
+//   name: "web-dev",
+//   budget: 5000,
+// };
+
+// const transformDepartment = (
+//   department: Department,
+//   amount: number
+// ): Project => {
+//   return {
+//     name: department.name,
+//     projectBudget: amount,
+//   };
+// };
+
+// const mainProject: Project = transformDepartment(department, 4000);
+
+// function to check if n is number "TYPE GUARD"
+// const isNumber = (n: string[] | number | boolean): n is number => {
+//   return typeof n === "number";
+// };
+
+// const isNumber = (n: unknown): n is number => {
+//   return typeof n === "number";
+// };
+
+// interface Car {
+//   name: "car";
+//   engine: string;
+//   wheels: {
+//     amount: number;
+//     type: string;
+//   };
+// }
+
+// interface Ship {
+//   name: "ship";
+//   engine: string;
+//   sail: string;
+// }
+
+// interface Airplane {
+//   name: "airplane";
+//   engine: string;
+//   wings: string;
+// }
+
+// interface SuperAirplane {
+//   name: "something";
+//   engine: string;
+//   superWings: string;
+// }
+
+// const isCar = (car: Vehicle): car is Car => {
+//   // return "wheels" in car;
+//   // or
+//   return (car as Car).wheels !== undefined;
+// };
+
+// const isShip = (ship: Vehicle): ship is Ship => {
+//   // return "wheels" in car;
+//   // or
+//   return (ship as Ship).sail !== undefined;
+// };
+
+// type Vehicle = Car | Ship | Airplane | SuperAirplane;
+
+// interface ComplexVehicle {
+//   name: "car" | "ship" | "airplane";
+//   engine: string;
+//   wheels?: number;
+//   sail?: string;
+//   wings?: string;
+// }
+
+// const repairVehicle = (vehicle: Vehicle) => {
+//   // if (isCar(vehicle)) {
+//   //   console.log(vehicle.wheels);
+//   // } else if (isShip(vehicle)) {
+//   //   console.log(vehicle.sail);
+//   // } else {
+//   //   console.log(vehicle.wings);
+//   // }
+//   switch (vehicle.name) {
+//     case "car":
+//       console.log(vehicle.wheels);
+//       break;
+//     case "ship":
+//       console.log(vehicle.sail);
+//       break;
+//     case "airplane":
+//       console.log(vehicle.wings);
+//       break;
+
+//     case "something":
+//       console.log(vehicle.superWings);
+//       break;
+//     default:
+//       const something: never = vehicle;
+//       console.log("Error", something);
+//   }
+// };
+
+// interface Square {
+//   side: number;
+//   area: number;
+// }
+
+// interface Rect {
+//   a: number;
+//   b: number;
+//   area: number;
+// }
+
+// // * function overload, kind of narrowing
+// function calculateArea(side: number): Square;
+// function calculateArea(a: number, b: number): Rect;
+
+// function calculateArea(a: number, b?: number): Square | Rect {
+//   if (b) {
+//     const rect: Rect = {
+//       a,
+//       b,
+//       area: a * b,
+//     };
+//     return rect;
+//   } else {
+//     const square: Square = {
+//       side: a,
+//       area: a * a,
+//     };
+//     return square;
+//   }
+// }
+
+// calculateArea(1);
+
+// Request
+
+// type AnimalTypes = "cat" | "dog" | "bird";
+
+// enum AnimalStatus {
+//   Available = "available",
+//   NotAvailable = "not available",
+// }
+
+// interface Animal {
+//   animal: AnimalTypes;
+//   breed: string;
+//   sterilized?: string;
+// }
+
+// interface AnimalAvailableData extends Animal {
+//   location: string;
+//   age?: number;
+// }
+
+// interface AnimalNotAvailableData {
+//   message: string;
+//   nextUpdateIn: Date;
+// }
+
+// interface AnimalAvailableResponse {
+//   status: AnimalStatus.Available;
+//   data: AnimalAvailableData;
+// }
+// interface AnimalNotAvailableResponse {
+//   status: AnimalStatus.NotAvailable;
+//   data: AnimalNotAvailableData;
+// }
+
+// type ResponseTypes = AnimalAvailableResponse | AnimalNotAvailableResponse;
+
+// // const isAnimal = (animal: Animal): animal is Animal => {
+// //   return "animal" in animal;
+// // };
+
+// const isAvailable = (res: ResponseTypes): res is AnimalAvailableResponse => {
+//   if (res.status === AnimalStatus.Available) {
+//     return true;
+//   }
+//   return false;
+// };
+
+// function checkAnimalData(animal: ResponseTypes): AnimalAvailableData | string {
+//   if (isAvailable(animal)) {
+//     return animal.data;
+//   }
+//   return `${animal.data.message}, you can try in ${animal.data.nextUpdateIn}`;
+// }
+
+// type voidFunc = () => void;
+
+// const retString: voidFunc = () => {
+//   return "string";
+// };
+
+// const s = retString();
+// console.log(s);
+
+// const retNum: voidFunc = () => {
+//   return 5;
+// };
+
+// const n = retNum();
+
+// const names = ["anna", "john"];
+// const newArr = names.slice();
+
+// names.forEach((name, i, arr) => arr.push("hey"));
+
+// ! GENERICS
+
+const processingData = <T>(data: T): T => {
+  return data;
+};
+
+console.log(processingData(1));
+console.log(processingData<number>(1));
+
+// interface PrintUK {
+//   design: number;
+// }
+
+// interface PrintES {
+//   design: string;
+// }
+// this is worse than the variant below because u cannot reuse the function with different types, generics solve this problem
+
+interface Print<T> {
+  design: T;
+}
+
+const somePrint: Print<string> = {
+  design: "sdfsd",
+};
+
+const someOtherPrint: Print<number> = {
+  design: 2342,
+};
