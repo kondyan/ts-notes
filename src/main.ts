@@ -859,12 +859,21 @@
 
 // ! GENERICS
 
-const processingData = <T>(data: T): T => {
-  return data;
-};
+// const processingData = <T, S>(data: T, options: S): string => {
+//   switch (typeof data) {
+//     case "string":
+//       return "data is string";
+//       break;
+//     case "number":
+//       return "data is number";
+//       break;
+//     default:
+//       return "not valid";
+//   }
+// };
 
-console.log(processingData(1));
-console.log(processingData<number>(1));
+// console.log(processingData(1, "fast"));
+// console.log(processingData<number, string>(1, "slow"));
 
 // interface PrintUK {
 //   design: number;
@@ -875,14 +884,147 @@ console.log(processingData<number>(1));
 // }
 // this is worse than the variant below because u cannot reuse the function with different types, generics solve this problem
 
-interface Print<T> {
-  design: T;
+// interface Print<T> {
+//   design: T;
+// }
+
+// const somePrint: Print<string> = {
+//   design: "whatever",
+// };
+
+// const someOtherPrint: Print<number> = {
+//   design: 2342,
+// };
+
+// const processing = <T>(data: T): T => data;
+
+// interface ProcessingFn {
+//   <T>(data: T): T;
+// }
+
+// interface DataServer {
+//   processing: ProcessingFn;
+// }
+
+// const saver: DataServer = {
+//   // processing(data) {
+//   //   console.log(data);
+//   //   return data;
+//   // },
+//   processing: <T>(data: T) => data,
+// };
+// console.log(saver);
+
+// type Something<T> = T;
+
+// interface ParentsOfUser {
+//   mother: string;
+//   father: string;
+// }
+// interface User<ParentsData extends ParentsOfUser> {
+//   login: string;
+//   age: number;
+//   parents: ParentsData;
+// }
+
+// const user: User<{ mother: string; father: string; married: boolean }> = {
+//   login: "something",
+//   age: 54,
+//   parents: {
+//     mother: "something",
+//     father: "something",
+//     married: true,
+//   },
+// };
+
+// type OrNull<Type> = Type | null;
+// type OneOrMany<Type> = Type | Type[];
+
+// const data: OneOrMany<number[]> = [5];
+
+// const depositMoney = <T extends number | string>(amount: T): T => {
+//   console.log(`req to server with amount ${amount}`);
+//   return amount;
+// };
+
+// depositMoney(5325);
+// depositMoney("345345");
+
+// *
+
+// Создать Generic-интерфейс PlayerData, который подходил бы для создания таких объектов:
+
+const player1 = {
+  game: "CS:GO",
+  hours: 300,
+  server: "basic",
+};
+
+const player2 = {
+  game: 2048,
+  hours: "300 h.",
+  server: "arcade",
+};
+
+const player3 = {
+  game: "Chess",
+  hours: {
+    total: 500,
+    inMenu: 50,
+  },
+  server: "chess",
+};
+
+// Массив данных с фигурами содержит объекты, у каждого из которых обязательно есть свойство name
+// Каждый объект может еще содержать дополнительные свойства в случайном виде
+// Свойство name может иметь только 4 варианта
+// Функция calculateAmountOfFigures должна принимать массив с объектами, у которых обязательно должно быть свойство name
+// Возвращает она объект-экземпляр AmountOfFigures
+// Внутри себя подсчитывает сколько каких фигур было в массиве и записывает результаты в AmountOfFigures
+// С текущими данными в консоль должно попадать:
+// { squares: 3, circles: 2, triangles: 2, others: 1 }
+
+interface AmountOfFigures {
+  squares: number;
+  circles: number;
+  triangles: number;
+  others: number;
 }
 
-const somePrint: Print<string> = {
-  design: "sdfsd",
-};
+function calculateAmountOfFigures(figure): AmountOfFigures {}
 
-const someOtherPrint: Print<number> = {
-  design: 2342,
-};
+const data = [
+  {
+    name: "rect",
+    data: { a: 5, b: 10 },
+  },
+  {
+    name: "rect",
+    data: { a: 6, b: 11 },
+  },
+  {
+    name: "triangle",
+    data: { a: 5, b: 10, c: 14 },
+  },
+  {
+    name: "line",
+    data: { l: 15 },
+  },
+  {
+    name: "circle",
+    data: { r: 10 },
+  },
+  {
+    name: "circle",
+    data: { r: 5 },
+  },
+  {
+    name: "rect",
+    data: { a: 15, b: 7 },
+  },
+  {
+    name: "triangle",
+  },
+];
+
+console.log(calculateAmountOfFigures(data));
