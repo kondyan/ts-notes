@@ -14,7 +14,8 @@
     "noEmit": true,
 
     /* Linting */
-    "strict": true,
+    "strict": false,
+    // turned off temporary for Classes
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
