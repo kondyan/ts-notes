@@ -1,3 +1,6 @@
+import "reflect-metadata";
+// const limitMetaDataKey = Symbol("limit");
+
 // const currRate: string = "1.05";
 
 // const fetchCurr = (response: string) => {
@@ -1724,54 +1727,666 @@
 
 // ! PRACTICE LECTION 73
 
-enum TransferStatus {
-  Pending = "pending",
-  Rejected = "rejected",
-  Completed = "completed",
-}
+// enum TransferStatus {
+//   Pending = "pending",
+//   Rejected = "rejected",
+//   Completed = "completed",
+// }
 
-enum ErrorMessages {
-  NotFound = "Not found: 404",
-  NotEnoughSpace = "Not enough space: 507",
-  Forbidden = "Forbidden: 403",
-}
+// enum ErrorMessages {
+//   NotFound = "Not found: 404",
+//   NotEnoughSpace = "Not enough space: 507",
+//   Forbidden = "Forbidden: 403",
+// }
 
-interface ITransfer {
-  path: string;
-  data: string[];
-  date?: Date;
-  start: (p: string, d: string[]) => string;
-  stop: (reason: string) => string;
-}
+// interface ITransfer {
+//   path: string;
+//   data: string[];
+//   date?: Date;
+//   start: (p: string, d: string[]) => string;
+//   stop: (reason: string) => string;
+// }
 
-interface TransferError {
-  message: ErrorMessages;
-}
+// interface TransferError {
+//   message: ErrorMessages;
+// }
 
-class SingleFileTransfer implements ITransfer, TransferError {
-  path: string;
-  data: string[];
-  date?: Date;
-  message: ErrorMessages;
-  status: TransferStatus;
+// class SingleFileTransfer implements ITransfer, TransferError {
+//   path: string;
+//   data: string[];
+//   date?: Date;
+//   message: ErrorMessages;
+//   status: TransferStatus;
 
-  checkTransferStatus() {
-    return this.status;
-  }
+//   checkTransferStatus() {
+//     return this.status;
+//   }
 
-  start(p: string, d: string[]): string {
-    return `${p}, ${d}, Date: ${new Date().toTimeString()}`;
-  }
+//   start(p: string, d: string[]): string {
+//     return `${p}, ${d}, Date: ${new Date().toTimeString()}`;
+//   }
 
-  stop(reason: string): string {
-    return `Reason: ${reason}, Date: ${new Date().toTimeString()}`;
-  }
+//   stop(reason: string): string {
+//     return `Reason: ${reason}, Date: ${new Date().toTimeString()}`;
+//   }
 
-  test(): string {
-    return `Status ${this.status}, Error Message: ${this.message}`;
-  }
-}
+//   test(): string {
+//     return `Status ${this.status}, Error Message: ${this.message}`;
+//   }
+// }
 
-const transfer = new SingleFileTransfer();
+// const transfer = new SingleFileTransfer();
 
-console.log(transfer.stop("test"));
+// console.log(transfer.stop("test"));
+
+//!  private(TS only) #(for JS/TS), public, protected(private for extending(parenting) in other classes)
+
+// const setName = () => {
+//   return "COD";
+// };
+
+// class Player {
+//   // static prop, can be used and accessed without creating a class entity
+//   private static game: string = "COD";
+
+//   #login: string;
+//   private _password: string;
+//   public server: string;
+//   protected consent: boolean;
+
+//   // ! to forbidden creating new class entities, basically making class static
+//   // private constructor()
+
+//   constructor(login: string) {
+//     this.#login = login;
+//   }
+
+//   // ! to fix the static prop in class, unavailable to any changes
+//   static {
+//     Player.game = setName();
+//   }
+
+//   get password() {
+//     return this.password;
+//   }
+
+//   set password(value: string) {
+//     this._password = value;
+//   }
+
+//   static getGameName() {
+//     return Player.game;
+//   }
+
+//   logIn = () => {
+//     return `Player ${this.#login} online!`;
+//   };
+
+//   connect() {
+//     return this;
+//   }
+
+//   isPro(): this is CompetitivePlayer {
+//     return this instanceof CompetitivePlayer;
+//   }
+// }
+
+// console.log(Player.getGameName());
+
+// const newPlayer = new Player("test");
+// console.log(newPlayer.connect().logIn());
+
+// const test = newPlayer.logIn;
+// test();
+
+// class CompetitivePlayer extends Player {
+//   rank: number;
+
+//   checkLogin() {
+//     return this.logIn();
+//   }
+
+//   isConsented() {
+//     this.consent ? "Yes" : "No";
+//   }
+// }
+
+// const player = new CompetitivePlayer("Test2");
+// console.log(player.connect().logIn());
+// // class User {
+// //   constructor(public email: string, public name: string) {}
+// // }
+
+// const somePlayer: Player | CompetitivePlayer = new CompetitivePlayer("test3");
+// somePlayer.isPro() ? console.log(somePlayer) : console.log(somePlayer);
+
+// ! ABSTRACT CLASSES
+// interface IEngine {
+//   model: string;
+//   capacity: number;
+//   startEngine: (time: Date) => string;
+// }
+
+// abstract class AbstractVehicle {
+//   model: string;
+//   capacity: number;
+//   abstract startEngine: (time: Date) => string;
+//   stopEngine(time: Date): string {
+//     return "Engine Stopped";
+//   }
+// }
+
+// class Vehicle extends AbstractVehicle {
+//   startEngine = (time: Date) => {
+//     return "Started";
+//   };
+// }
+
+// ! PRACTICE LECTION 79
+
+// interface Queue<T> {
+//   enqueue(item: T): void; // поставить в очередь
+//   dequeue(): T | undefined; // исключить из очереди
+//   peek(): T | undefined | null; // посмотреть первый элемент
+//   isEmpty(): boolean; // проверка на "пустоту" сущности
+//   length(): number; // проверка на длину
+// }
+
+// class ArrayQueue<T> implements Queue<T> {
+//   private queue: T[] = [];
+
+//   enqueue(this: ArrayQueue<T>, item: T): void {
+//     this.queue.push(item);
+//   }
+//   dequeue(this: ArrayQueue<T>): T | undefined {
+//     return this.isEmpty() ? undefined : this.queue.shift();
+//   }
+//   peek(this: ArrayQueue<T>): T | undefined | null {
+//     return this.isEmpty() ? undefined : this.queue[0];
+//   }
+//   isEmpty(this: ArrayQueue<T>): boolean {
+//     return this.length() ? false : true;
+//   }
+//   length(this: ArrayQueue<T>): number {
+//     return this.queue.length;
+//   }
+// }
+
+// class Stack<T> {
+//   private stack: T[] = [];
+
+//   private limit: number;
+
+//   constructor(limit: number = Number.MAX_VALUE) {
+//     this.limit = limit;
+//   }
+
+//   push(this: Stack<T>, value: T) {
+//     return this.length() >= this.limit
+//       ? new Error("Limit has been reached")
+//       : this.stack.push(value);
+//   }
+
+//   pop(this: Stack<T>) {
+//     return this.isEmpty()
+//       ? new Error("There are no Items to delete")
+//       : this.stack.pop();
+//   }
+
+//   length(this: Stack<T>) {
+//     return this.stack.length;
+//   }
+
+//   isEmpty(this: Stack<T>) {
+//     return this.length() ? false : true;
+//   }
+
+//   top(this: Stack<T>) {
+//     return this.isEmpty() ? null : this.stack[this.length() - 1];
+//   }
+// }
+
+// const arrTest1 = new ArrayQueue<number>();
+// arrTest1.enqueue(5);
+// arrTest1.enqueue(10);
+// console.log(arrTest1.peek());
+// console.log(arrTest1.dequeue());
+// console.log(arrTest1.length());
+
+// const arrTest2 = new ArrayQueue<string>();
+// arrTest2.enqueue("5");
+// arrTest2.enqueue("10");
+// console.log(arrTest2.peek());
+// console.log(arrTest2.dequeue());
+// console.log(arrTest2.length());
+
+// const stackTest1 = new Stack<number>(10);
+// stackTest1.push(20);
+// stackTest1.push(50);
+// console.log(stackTest1.top());
+// console.log(stackTest1.pop());
+// console.log(stackTest1.length());
+
+// const stackTest2 = new Stack<string>(10);
+// stackTest2.push("20");
+// stackTest2.push("50");
+// console.log(stackTest2.top());
+// console.log(stackTest2.pop());
+// console.log(stackTest2.length());
+
+// ! SECTION 6 DECORATORS
+
+// interface ICar {
+//   fuel: string;
+//   open: boolean;
+//   freeSeats: number;
+// }
+
+// * OLD SYNTAX
+// function changeDoorStatus (status: boolean)  {
+//   return <T extends { new (...args: any[]): {} }>(constructor: T) => {
+//     return class extends constructor {
+//       open = status;
+//     };
+//   };
+// };
+
+// function changeFuelAmount (amount: number)  {
+//   return <T extends { new (...args: any[]): {} }>(constructor: T) => {
+//     return class extends constructor {
+//       fuel = `${amount}%`;
+//     };
+//   };
+// };
+
+// * NEW SYNTAX
+// function changeDoorStatus(status: boolean) {
+//   return <T extends { new (...args: any[]): {} }>(
+//     target: T
+//     // context: ClassDecoratorContext<T>
+//   ) => {
+//     return class extends target {
+//       open = status;
+//     };
+//   };
+// }
+
+// function changeFuelAmount(amount: number) {
+//   return <T extends { new (...args: any[]): {} }>(
+//     target: T
+//     // context: ClassDecoratorContext<T>
+//   ) => {
+//     return class extends target {
+//       fuel = `${amount}%`;
+//     };
+//   };
+// }
+
+// * OLD SYNTAX
+// function checkAmountOfFuel  (
+//   target: Object,
+//   propertyKey: string | symbol,
+//   descriptor: PropertyDescriptor
+// ): PropertyDescriptor | void  {
+//   const oldValue = descriptor.value;
+//   descriptor.value = function (this: any, ...args: any[]) {
+//     console.log(this.fuel);
+//     return oldValue.apply(this, args);
+//   };
+// };
+
+// * NEW SYNTAX
+// function checkAmountOfFuel(target: any, _context: ClassMethodDecoratorContext) {
+//   return function (this: any, ...args: any[]) {
+//     console.log(this.fuel);
+//     return target.apply(this, args);
+//   };
+// }
+
+// function closeCar  <T extends { new (...args: any[]): {} }>(constructor: T)  {
+//   return class extends constructor {
+//     open = false;
+//   };
+// };
+
+// * OLD SYNTAX
+// function checkNumberOfSeats(limit: number) {
+//   return function (target: Object, propertyKey: string | symbol) {
+//     let symbol = Symbol();
+
+//     const getter = function (this: any) {
+//       return this[symbol];
+//     };
+
+//     const setter = function (this: any, newAmount: number) {
+//       if (newAmount >= 1 && newAmount <= limit) {
+//         this[symbol] = newAmount;
+//       } else {
+//         Object.defineProperty(target, "errors", {
+//           value: `Limit of ${limit} seats has been reached`,
+//         });
+//       }
+//     };
+
+//     Object.defineProperty(target, propertyKey, {
+//       get: getter,
+//       set: setter,
+//     });
+//   };
+// }
+
+// * NEW SYNTAX (works only on initialized value)
+// function checkNumberOfSeats(limit: number) {
+//   return function (_target: undefined, _context: ClassFieldDecoratorContext) {
+//     return function (this: any, newAmount: number) {
+//       if (newAmount >= 1 && newAmount < limit) {
+//         return newAmount;
+//       } else {
+//         console.log(`Limit of ${limit} seats has been reached`);
+//       }
+//     };
+//   };
+// }
+
+// * OLD SYNTAX
+// function log(
+//   target: Object,
+//   propertyKey: string | symbol,
+//   descriptor: PropertyDescriptor
+// ): PropertyDescriptor | void {
+//   const oldValue = descriptor.set;
+//   const oldGet = descriptor.get;
+//   descriptor.set = function (this: any, ...args: any[]) {
+//     console.log(`Changing value to ${[...args]}`);
+//     return oldValue?.apply(this, args);
+//   };
+//   descriptor.get = function (this: any, ...args: any[]) {
+//     console.log(`Test`);
+//     return oldGet?.apply(this, args);
+//   };
+// }
+
+// * NEW SYNTAX
+
+// function logOnSet<T, R>(
+//   target: (this: T, value: number) => R,
+//   _context: ClassSetterDecoratorContext<T, number>
+// ) {
+//   return function (this: T, ...args: any[]): R {
+//     console.log(`Changing value to ${[...args]}`);
+//     return target.apply(this, args);
+//   };
+// }
+
+// function logOnGet<T, R>(
+//   target: (this: T) => R,
+//   _context: ClassGetterDecoratorContext<T, number>
+// ) {
+//   return function (this: T): R {
+//     console.log("Test");
+//     return target.apply(this);
+//   };
+// }
+
+// * REFLECT METADATA (OLD SYNTAX)
+// function limit(
+//   target: Object,
+//   propertyKey: string | symbol,
+//   parameterIndex: number
+// ) {
+//   let limitedParameters: number[] =
+//     Reflect.getOwnMetadata(limitMetaDataKey, target, propertyKey) || [];
+//   limitedParameters.push(parameterIndex);
+//   Reflect.defineMetadata(
+//     limitMetaDataKey,
+//     limitedParameters,
+//     target,
+//     propertyKey
+//   );
+// }
+
+// function validate(
+//   target: Object,
+//   propertyKey: string | symbol,
+//   descriptor: PropertyDescriptor
+// ) {
+//   let method = descriptor.value;
+
+//   descriptor.value = function (...args: any) {
+//     let limitedParameters: number[] = Reflect.getOwnMetadata(
+//       limitMetaDataKey,
+//       target,
+//       propertyKey
+//     );
+
+//     if (limitedParameters) {
+//       for (let index of limitedParameters) {
+//         if (args[index] > 4) {
+//           return "4 Passengers is the limit";
+//         }
+//       }
+//     }
+//     return method?.apply(this, args);
+//   };
+// }
+
+// @changeDoorStatus(false)
+// @changeFuelAmount(95)
+// class myCar implements ICar {
+//   fuel = "50%";
+//   open: boolean = true;
+//   errors: any;
+//   _weight: number = 1000;
+
+//   @logOnSet
+//   set weight(num: number) {
+//     this._weight = this._weight + num;
+//   }
+
+//   @logOnGet
+//   get weight() {
+//     return this._weight;
+//   }
+
+//   @checkNumberOfSeats(4)
+//   freeSeats: number = 1;
+
+//   // @ts-ignore
+//   @checkAmountOfFuel
+//   isOpen(value: string) {
+//     return this.open ? "open" : `closed ${value}`;
+//   }
+
+// @validate
+// startTravel(@limit passengers: number) {
+//   console.log(`Started with ${passengers} passengers`);
+// }
+// }
+
+// const car = new myCar();
+// car.weight = 3;
+// car.freeSeats = 5;
+// console.log(car.freeSeats);
+// console.log(car.weight);
+// console.log(car.startTravel(5));
+
+// console.log(car.errors);
+
+// const addFuel = (car: myCar) => {
+//   car.fuel = "50%";
+//   console.log("adding fuel...");
+//   return car;
+// };
+
+// ! PRACTICE LECTION 96
+
+// interface ICuboid {
+//   width: number;
+//   length: number;
+//   height: number;
+//   calcArea: (multiply?: number) => number;
+//   calcVolume: (multiply?: number) => number;
+// }
+
+// @creationDate()
+// class ShippingContainer implements ICuboid {
+//   @IsInt()
+//   @Min(1)
+//   width: number;
+
+//   @IsInt()
+//   @Min(1)
+//   length: number;
+
+//   @IsInt()
+//   @Min(1)
+//   @Max(8)
+//   height: number;
+
+//   constructor(width: number, length: number, height: number) {
+//     this.width = width;
+//     this.length = length;
+//     this.height = height;
+//     validate(this, "width", width);
+//     validate(this, "length", length);
+//     validate(this, "height", height);
+//   }
+
+//   @logCalculation("calcArea")
+//   calcArea(multiply?: number): number {
+//     return this.width * this.length * (multiply ? multiply : 1);
+//   }
+
+//   @logCalculation("calcVolume")
+//   calcVolume(multiply?: number) {
+//     return this.width * this.length * this.height * (multiply ? multiply : 1);
+//   }
+// }
+
+// function creationDate() {
+//   return <T extends { new (...args: any[]): {} }>(constructor: T) => {
+//     return class extends constructor {
+//       createdAt = new Date().toTimeString();
+//     };
+//   };
+// }
+// // 2. Необходимо создать декораторы IsInt, Min и Max, которые будут валидировать свойства класса
+// // Применение смотрите в самом классе. При ошибке выполняйте throw new Error
+// // IsInt проверяет на то, что было передано целое число
+
+// function IsInt() {
+//   return (target: Object, propertyKey: string | symbol) => {
+//     Reflect.defineMetadata("IsInt", true, target, propertyKey);
+//   };
+// }
+
+// function Min(limit: number) {
+//   return (target: Object, propertyKey: string | symbol) => {
+//     Reflect.defineMetadata("Min", limit, target, propertyKey);
+//   };
+// }
+
+// function Max(limit: number) {
+//   return (target: Object, propertyKey: string | symbol) => {
+//     Reflect.defineMetadata("Max", limit, target, propertyKey);
+//   };
+// }
+
+// function validate(
+//   target: Object,
+//   propertyKey: string,
+//   value: any
+// ): boolean | Error {
+//   if (
+//     (Reflect.getMetadata("IsInt", target, propertyKey) &&
+//       !Number.isInteger(value)) ||
+//     value !== parseInt(value)
+//   ) {
+//     console.log(new Error(`Property ${propertyKey} is not an integer number`));
+//     return new Error(`Property ${propertyKey} is not an integer number`);
+//   }
+
+//   if (
+//     Reflect.hasMetadata("Min", target, propertyKey) &&
+//     value < Reflect.getMetadata("Min", target, propertyKey)
+//   ) {
+//     console.log(
+//       new Error(
+//         `Min amount of characters in ${propertyKey} has to be: ${Reflect.getMetadata(
+//           "Min",
+//           target,
+//           propertyKey
+//         )}`
+//       )
+//     );
+//     return new Error(
+//       `Min amount of characters in ${propertyKey} has to be: ${Reflect.getMetadata(
+//         "Min",
+//         target,
+//         propertyKey
+//       )}`
+//     );
+//   }
+
+//   if (
+//     Reflect.hasMetadata("Max", target, propertyKey) &&
+//     value > Reflect.getMetadata("Max", target, propertyKey)
+//   ) {
+//     console.log(
+//       new Error(
+//         `Max amount of characters in ${propertyKey} has to be: ${Reflect.getMetadata(
+//           "Max",
+//           target,
+//           propertyKey
+//         )}`
+//       )
+//     );
+//     return new Error(
+//       `Max amount of characters in ${propertyKey} has to be: ${Reflect.getMetadata(
+//         "Max",
+//         target,
+//         propertyKey
+//       )}`
+//     );
+//   }
+//   return true;
+// }
+
+// function logCalculation(method: string) {
+//   return (
+//     _target: Object,
+//     _propertyKey: string | symbol,
+//     descriptor: PropertyDescriptor
+//   ): PropertyDescriptor | void => {
+//     const oldValue = descriptor.value;
+//     descriptor.value = function (this: any, ...args: any[]) {
+//       this.lastCalculation = `Last calculation ${method} was at ${new Date().toTimeString()}`;
+
+//       return oldValue.apply(this, args);
+//     };
+//   };
+// }
+
+// function finalValidation(obj: unknown) {
+//   if (obj && typeof obj === "object" && !Array.isArray(obj)) {
+//     for (let key in obj) {
+//       validate(obj, key, obj[key as keyof typeof obj]);
+//     }
+//   }
+// }
+
+// type ShippingContainerData = {
+//   lastCalculation: string;
+//   createdAt: Date;
+// };
+
+// const container = new ShippingContainer(10, 100, 7) as ICuboid &
+//   ShippingContainerData;
+// container.width = 10;
+// container.height = 5;
+// console.log(container.calcVolume());
+// console.log(container.lastCalculation);
+// console.log(container.calcArea());
+// console.log(container.lastCalculation);
+
+// finalValidation(container);
